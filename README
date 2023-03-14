@@ -1,15 +1,37 @@
-Pentru a vedea functionalitatea “jocului” am creat o clasa “Testare”, entry-point-ul aplicatiei, unde instantiez un obiect din clasa “Game” dupa principiile sablonului “Singleton”. Jucatorul are posibilitatea de a alege de la tastatura modul in care va dori sa joace: in terminal sau in interfata grafica.
-Jucatorul va putea alege contul dorit din lista de conturi obtinuta in urma apelarii metodei “run” din clasa “Game”, iar pentru contul ales i se va prezenta lista de personaje disponibile. Se va instantia un obiect de tipul personajului ales, provenit din ierarhia de clase “ Character”, folosind sablonul “Factory”. Obiectului i se vor atribui informatii necesare precum: nume, experienta, nivel. In cazul in care jocul va rula in terminal, urmez scenariul de testare cerut.
-Am realizat o clasa separata, unde creez harta avand configuratia dorita. Clasa “Grid” va avea constructorul privat, ceea ce va restrictiona instantierea obiectelor de acest tip. Am ales sa declar metodele clasei de tip static, pentru a le putea utiliza in afara clasei. Apelez metoda statica de generarea a hartii din clasa “Grid”, avand drept argumente lungimea si latimea hartii “hardcodate”. Harta va avea initial doar celule nule, iar pe masura ce o parcurg cu metodele statice de traversare: “goNorth()”,”goSouth()”, etc. voi modifica celula de pe pozitia curenta cu celula de pe aceeasi pozitie din harta de testare. Hartile vor fi de tip <ArrayList<ArrayList<Cell>>, iar pentru a instantia un obiect de tip “Cell” voi avea 2 posibiliati:
--Daca celula este de tipul “SHOP” sau “ENEMY” apelez un constructor ce are ca argumente coordonatele celulei si un obiect ce implementeaza interfata “CellElement” de tipul “Shop”, respectiv “Enemy”.
--Daca celula este de tipul “EMPTY” sau “FINISH” apelez un constructor ce are ca argumente coordonatele celulei si o enumeratie “CellEnum” ce defineste tipul celulei.
-De asemenea, creez o metoda pentru afisarea caracterului in functie de tipul celulei, pentru a afisa harta in modul dorit.
-Am declarat o clasa interna ce implementeaza interfata “KeyListener” pentru a realiza trecerea la urmatoarea mutare din scenariul hardcodat la apasarea tastei “P”. La fiecare deplasare pe harta, actualizez celula curenta, iar pentru aceasta extrag o poveste (din lista de povesti avand drept cheie tipul celulei) din dictionarul care modeleaza povestile din clasa “Game” si o afisez. Apoi, apelez metoda din clasa “Game” care afiseaza optiunile curente in functie de tipul celulei si realizeaza urmatoarele comenzi din scenariul cerut.
-Atunci cand personajul se afla pe o celula de tip “EMPTY”, acesta va avea sanse de 20% de a gasi monede.
-Daca se afla pe o celula de tip “SHOP” se va incerca cumpararea unei potiuni de mana si a unei potiuni de viata, daca acestea exista in lista de potiuni generate aleator.
-Atunci cand personajul se afla pe o celula de tip “ENEMY”, in lupta cu inamicul acesta isi va folosi mai intai toate abilitatile, iar apoi va ataca normal sau va incerca folosirea unei potiuni de viata sau de mana (daca acestea se afla in inventar) daca valoarea vietii, respectiv a manei scad sub 20. Inamicul va
-avea sanse de 20% sa foloseasca o abilitate in lupta. Efectul pe care abilitatile il au asupra entitatilor va fi modelat cu ajutorul sablonului “Visitor”: clasa “Spell” implementeza interfata “Visitor”, iar “Entity”implemeneteaza interfata “Visited”. Lupta se termina cand viata unuia dintre cei doi ajunge la 0.
-Atat invingerea unui inamic, cat si terminarea unui joc ii pot aduce personajului experienta si monede (sanse de 80% sa castige monede in urma victoriei).
-In ceea ce priveste interfata grafica, am creat doua clase care vor gestiona pagina de autentificare, respectiv pagina de final. Constructorul paginii de autentificare va avea un argument de tip “Game”, intrucat aceasta clasa nu va putea fi instantiata decat o data, conform “Singleton Pattern”.
-JFrame-ul paginii de autentificare va contine 2 JScrollPane-uri care ii vor oferi jucatorului posibilitatea de a alege din lista de conturi a clasei “Game” cu ce cont doreste sa inceapa jocul, respectiv cu ce personaj al contului va dori sa joace.
-Constructorul clasei “PaginaFinal” va avea drept argumente campuri de date ce modeleaza informatii despre personaj pe care le va afisa la sfarsitul jocului.
+Pentru a vedea functionalitatea “jocului” am creat o clasa “Testare”, entry-point-ul aplicatiei, unde instantiez un 
+obiect din clasa “Game” dupa principiile sablonului “Singleton”. Jucatorul are posibilitatea de a alege de la tastatura 
+modul in care va dori sa joace: in terminal sau in interfata grafica.Jucatorul va putea alege contul dorit din lista de 
+conturi obtinuta in urma apelarii metodei “run” din clasa “Game”, iar pentru contul ales i se va prezenta lista de 
+personaje disponibile. Se va instantia un obiect de tipul personajului ales, provenit din ierarhia de clase “ 
+Character”, folosind sablonul “Factory”. Obiectului i se vor atribui informatii necesare precum: nume, experienta, 
+nivel. In cazul in care jocul va rula in terminal, urmez scenariul de testare cerut.Am realizat o clasa separata, unde 
+creez harta avand configuratia dorita. Clasa “Grid” va avea constructorul privat, ceea ce va restrictiona instantierea 
+obiectelor de acest tip. Am ales sa declar metodele clasei de tip static, pentru a le putea utiliza in afara clasei. 
+Apelez metoda statica de generarea a hartii din clasa “Grid”, avand drept argumente lungimea si latimea hartii 
+“hardcodate”. Harta va avea initial doar celule nule, iar pe masura ce o parcurg cu metodele statice de traversare: 
+“goNorth()”,”goSouth()”, etc. voi modifica celula de pe pozitia curenta cu celula de pe aceeasi pozitie din harta de 
+testare. Hartile vor fi de tip <ArrayList<ArrayList<Cell>>, iar pentru a instantia un obiect de tip “Cell” voi avea 2 
+posibiliati:-Daca celula este de tipul “SHOP” sau “ENEMY” apelez un constructor ce are ca argumente coordonatele 
+celulei si un obiect ce implementeaza interfata “CellElement” de tipul “Shop”, respectiv “Enemy”.-Daca celula este de 
+tipul “EMPTY” sau “FINISH” apelez un constructor ce are ca argumente coordonatele celulei si o enumeratie “CellEnum” ce 
+defineste tipul celulei.De asemenea, creez o metoda pentru afisarea caracterului in functie de tipul celulei, pentru a 
+afisa harta in modul dorit.Am declarat o clasa interna ce implementeaza interfata “KeyListener” pentru a realiza 
+trecerea la urmatoarea mutare din scenariul hardcodat la apasarea tastei “P”. La fiecare deplasare pe harta, actualizez 
+celula curenta, iar pentru aceasta extrag o poveste (din lista de povesti avand drept cheie tipul celulei) din 
+dictionarul care modeleaza povestile din clasa “Game” si o afisez. Apoi, apelez metoda din clasa “Game” care afiseaza 
+optiunile curente in functie de tipul celulei si realizeaza urmatoarele comenzi din scenariul cerut.Atunci cand 
+personajul se afla pe o celula de tip “EMPTY”, acesta va avea sanse de 20% de a gasi monede.Daca se afla pe o celula de 
+tip “SHOP” se va incerca cumpararea unei potiuni de mana si a unei potiuni de viata, daca acestea exista in lista de 
+potiuni generate aleator.Atunci cand personajul se afla pe o celula de tip “ENEMY”, in lupta cu inamicul acesta isi va 
+folosi mai intai toate abilitatile, iar apoi va ataca normal sau va incerca folosirea unei potiuni de viata sau de 
+mana (daca acestea se afla in inventar) daca valoarea vietii, respectiv a manei scad sub 20. Inamicul vaavea sanse de 
+20% sa foloseasca o abilitate in lupta. Efectul pe care abilitatile il au asupra entitatilor va fi modelat cu ajutorul 
+sablonului “Visitor”: clasa “Spell” implementeza interfata “Visitor”, iar “Entity”implemeneteaza interfata “Visited”. 
+Lupta se termina cand viata unuia dintre cei doi ajunge la 0.Atat invingerea unui inamic, cat si terminarea unui joc ii 
+pot aduce personajului experienta si monede (sanse de 80% sa castige monede in urma victoriei).In ceea ce priveste 
+interfata grafica, am creat doua clase care vor gestiona pagina de autentificare, respectiv pagina de final. 
+Constructorul paginii de autentificare va avea un argument de tip “Game”, intrucat aceasta clasa nu va putea fi 
+instantiata decat o data, conform “Singleton Pattern”.JFrame-ul paginii de autentificare va contine 2 JScrollPane-uri 
+care ii vor oferi jucatorului posibilitatea de a alege din lista de conturi a clasei “Game” cu ce cont doreste sa 
+inceapa jocul, respectiv cu ce personaj al contului va dori sa joace.Constructorul clasei “PaginaFinal” va avea drept 
+argumente campuri de date ce modeleaza informatii despre personaj pe care le va afisa la sfarsitul jocului.
